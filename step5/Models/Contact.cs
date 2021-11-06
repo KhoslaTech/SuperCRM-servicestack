@@ -1,37 +1,38 @@
 using System;
-using System.ComponentModel.DataAnnotations;
+using System.Runtime.Serialization;
 
 namespace SuperCRM.Models
 {
 	public class Contact
 	{
+		[DataMember]
 		public Guid? Id { get; set; }
 
-		[MaxLength(128)]
-		[Required]
+		[DataMember]
 		public string Name { get; set; }
 
-		[MaxLength(15)]
+		[DataMember]
 		public string Phone { get; set; }
 
-		[MaxLength(75)]
+		[DataMember]
 		public string Email { get; set; }
 
-		[MaxLength(128)]
+		[DataMember]
 		public string Address1 { get; set; }
 
-		[MaxLength(128)]
+		[DataMember]
 		public string Address2 { get; set; }
 
-		[MaxLength(64)]
-		[Required]
+		[DataMember]
 		public string AcquiredFrom { get; set; }
 
+		[DataMember]
 		public string Notes { get; set; }
 
+		[DataMember]
 		public DateTime CreatedDate { get; set; }
 
+		[DataMember]
 		public string CreatedByName { get; set; }
 	}
 }
- 
