@@ -22,7 +22,7 @@ namespace SuperCRM.Request.Interactions
 	}
 
 	[DataContract]
-	[Route("/interactions", "PUT")]
+	[Route("/interactions/{Id}", "PUT")]
 	public class EditInteraction : Interaction, IReturn<BaseRecordResponse<Interaction>>
 	{
 	}

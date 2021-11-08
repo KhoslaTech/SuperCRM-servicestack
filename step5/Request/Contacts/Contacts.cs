@@ -24,7 +24,7 @@ namespace SuperCRM.Request.Contacts
 	}
 
 	[DataContract]
-	[Route("/contacts", "PUT")]
+	[Route("/contacts/{Id}", "PUT")]
 	public class EditContact : Contact, IReturn<BaseRecordResponse<Contact>>
 	{
 	}
