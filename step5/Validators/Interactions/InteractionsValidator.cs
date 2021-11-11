@@ -1,5 +1,6 @@
 ﻿using ServiceStack.FluentValidation;
 using SuperCRM.Models;
+using SuperCRM.Request.Interactions;
 
 namespace SuperCRM.Validators.Interactions
 {
@@ -12,18 +13,20 @@ namespace SuperCRM.Validators.Interactions
 		}
 	}
 
-	public class CreateInteractionValidator : InteractionValidator
+	public class CreateInteractionValidator : AbstractValidator<CreateInteraction>
 	{
-		public CreateInteractionValidator()
+		public CreateInteractionValidator(IValidator<Interaction> interactionValidator)
 		{
+			RuleFor(x => x).SetValidator(interactionValidator);
 		}
 	}
 
-	public class EditInteractionValidator : InteractionValidator
+	public class EditInteractionValidator : AbstractValidator<EditInteraction>
 	{
-		public EditInteractionValidator()
+		public EditInteractionValidator(IValidator<Interaction> interactionValidator)
 		{
 			RuleFor(x => x.Id).NotEmpty();
+			RuleFor(x => x).SetValidator(interactionValidator);
 		}
 	}
 }

@@ -1,5 +1,6 @@
 ﻿using ServiceStack.FluentValidation;
 using SuperCRM.Models;
+using SuperCRM.Request.Contacts;
 
 namespace SuperCRM.Validators.Contacts
 {
@@ -30,19 +31,20 @@ namespace SuperCRM.Validators.Contacts
 		}
 	}
 
-	public class CreateContactValidator : ContactValidator
+	public class CreateContactValidator : AbstractValidator<CreateContact>
 	{
-		public CreateContactValidator()
+		public CreateContactValidator(IValidator<Contact> contactValidator)
 		{
+			RuleFor(x => x).SetValidator(contactValidator);
 		}
 	}
 
-	public class EditContactValidator : ContactValidator
+	public class EditContactValidator : AbstractValidator<EditContact>
 	{
-		public EditContactValidator()
+		public EditContactValidator(IValidator<Contact> contactValidator)
 		{
-			RuleFor(x => x.Id)
-				.NotEmpty();
+			RuleFor(x => x.Id).NotEmpty();
+			RuleFor(x => x).SetValidator(contactValidator);
 		}
 	}
 }
