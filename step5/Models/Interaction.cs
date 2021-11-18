@@ -22,7 +22,7 @@ namespace SuperCRM.Models
 		public string Notes { get; set; }
 
 		[DataMember]
-		public DateTime InteractionDate { get; set; }
+		public DateTime? InteractionDate { get; set; }
 
 		[DataMember]
 		public DateTime CreatedDate { get; set; }
