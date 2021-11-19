@@ -37,7 +37,7 @@ namespace SuperCRM.ServiceInterface
             {
 	            await this.permitRepository.AddPermitAsync(dbUser.Id, "Customer", dbUser.Id);
 				await SendVerificationMailAsync(dbUser);
-                var result = await this.authSessionProvider.LoginAsync(request.Email, request.Password, false, this.SecuritySettings.LetSuspendedAuthenticate);
+                var result = await this.authSessionProvider.LoginAsync(request.Email, request.Password, request.RememberMe, this.SecuritySettings.LetSuspendedAuthenticate);
 
                 return Ok(PopulateCurrentUserDetails(result));
             }
@@ -123,7 +123,7 @@ namespace SuperCRM.ServiceInterface
 			{
 				case OpResult.Success:
 					await this.UserService.GenerateVerificationTokenAsync(this.UserService.CurrentUserId).ConfigureAwait(false);
-					this.UserService.Load(this.UserService.CurrentUserId);
+					await this.UserService.LoadAsync(this.UserService.CurrentUserId).ConfigureAwait(false);
 					await SendVerificationMailAsync(this.UserService.CurrentUser);
 					return Ok(PopulateCurrentUserDetails());
 				case OpResult.AlreadyExists:
