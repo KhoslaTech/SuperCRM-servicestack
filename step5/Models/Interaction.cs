@@ -13,7 +13,7 @@ namespace SuperCRM.Models
 		public Guid? ContactId { get; set; }
 
 		[DataMember]
-		public InteractionMethod Method { get; set; }
+		public InteractionMethod? Method { get; set; }
 
 		[DataMember]
 		public string MethodDetails { get; set; }

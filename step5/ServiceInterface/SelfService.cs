@@ -114,6 +114,25 @@ namespace SuperCRM.ServiceInterface
 
 	        await SendVerificationMailAsync(this.UserService.CurrentUser);
 	        return Ok();
-        }
+		}
+
+		public async Task<BaseResponse> Post(ChangeEmail request)
+		{
+			var result = await this.UserService.ChangeUsernameAsync(this.UserService.CurrentUserId, request.Password, request.Email).ConfigureAwait(false);
+			switch (result)
+			{
+				case OpResult.Success:
+					await this.UserService.GenerateVerificationTokenAsync(this.UserService.CurrentUserId).ConfigureAwait(false);
+					this.UserService.Load(this.UserService.CurrentUserId);
+					await SendVerificationMailAsync(this.UserService.CurrentUser);
+					return Ok(PopulateCurrentUserDetails());
+				case OpResult.AlreadyExists:
+					return Error(AppOpResult.UsernameAlreadyExists, "An account with this email is already registered.");
+				case OpResult.InvalidPassword:
+					return Error(OpResult.InvalidPassword, "Invalid password.");
+				default:
+					return Error(result);
+			}
+		}
     }
 }

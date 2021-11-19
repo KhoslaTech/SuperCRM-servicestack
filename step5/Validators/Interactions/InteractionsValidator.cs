@@ -9,7 +9,12 @@ namespace SuperCRM.Validators.Interactions
 		public InteractionValidator()
 		{
 			RuleFor(x => x.ContactId).NotEmpty();
-			RuleFor(x => x.MethodDetails).MaximumLength(256);
+			RuleFor(x => x.Method).NotEmpty();
+			RuleFor(x => x.MethodDetails).MaximumLength(256)
+				.NotEmpty()
+				.When(x => x.Method == DataModels.InteractionMethod.Other)
+				.WithMessage("{0} is required when Method specified as 'Other'.");
+			RuleFor(x => x.Notes).NotEmpty();
 		}
 	}
 
