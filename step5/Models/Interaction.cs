@@ -13,7 +13,7 @@ namespace SuperCRM.Models
 		public Guid? ContactId { get; set; }
 
 		[DataMember]
-		public InteractionMethod Method { get; set; }
+		public InteractionMethod? Method { get; set; }
 
 		[DataMember]
 		public string MethodDetails { get; set; }
@@ -22,7 +22,7 @@ namespace SuperCRM.Models
 		public string Notes { get; set; }
 
 		[DataMember]
-		public DateTime InteractionDate { get; set; }
+		public DateTime? InteractionDate { get; set; }
 
 		[DataMember]
 		public DateTime CreatedDate { get; set; }

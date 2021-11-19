@@ -335,6 +335,7 @@ namespace SuperCRM.DataModels
 	{
 		Phone,
 		Email,
+		Video,
 		InPerson,
 		Forum,
 		SocialMedia,
@@ -359,7 +360,8 @@ namespace SuperCRM.DataModels
 
 		public string Notes { get; set; }
 
-		public DateTime InteractionDate { get; set; }
+		[Required]
+		public DateTime? InteractionDate { get; set; }
 		public DateTime CreatedDate { get; set; }
 
 		[ForeignKey("CreatedBy")]
