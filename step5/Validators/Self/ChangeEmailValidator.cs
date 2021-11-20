@@ -9,7 +9,7 @@ namespace SuperCRM.Validators.Self
 		{
 			RuleFor(x => x.Email)
 				.NotEmpty()
-				.MaximumLength(128)
+				.MaximumLength(100)
 				.EmailAddress();
 
 			RuleFor(x => x.Password)
